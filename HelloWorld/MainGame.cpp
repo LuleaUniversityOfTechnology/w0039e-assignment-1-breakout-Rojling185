@@ -7,7 +7,7 @@ Paddle paddle;
 void MainGameEntry( PLAY_IGNORE_COMMAND_LINE ){
 
 	LoadGame();
-	paddle.width = 46;
+	paddle.width = 64;
 	paddle.height = 8;
 	paddle.position = { 320 - paddle.width / 2,40 };
 	paddle.bottomRight = { paddle.position.x+paddle.width,paddle.position.y };
@@ -18,9 +18,9 @@ void MainGameEntry( PLAY_IGNORE_COMMAND_LINE ){
 bool MainGameUpdate( float elapsedTime ){
 	
 	Play::ClearDrawingBuffer( Play::cBlack );
+	colliding(paddle);
 	DrawPaddle(paddle);
 	MovePaddle(paddle);
-	colliding(paddle);
 	StepFrame(elapsedTime);
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( Play::KEY_ESCAPE );

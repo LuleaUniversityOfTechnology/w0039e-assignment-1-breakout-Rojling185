@@ -78,8 +78,8 @@ void colliding(Paddle& paddle) {
 	const std::vector<int> ballIds = Play::CollectGameObjectIDsByType(TYPE_BALL);
 	for (int i = 0; i < ballIds.size(); i++) {
 		GameObject& balls = Play::GetGameObject(ballIds[i]);
-		if (balls.pos.x < paddle.position.x + paddle.width && balls.pos.x> paddle.position.x) {
-			if (balls.pos.y-4 < paddle.position.y + paddle.height && balls.pos.y > paddle.position.y) {
+		if (balls.pos.x < paddle.position.x + paddle.width/2 && balls.pos.x > paddle.position.x - paddle.width/2) {
+			if (balls.pos.y < paddle.position.y + paddle.height && balls.pos.y > paddle.position.y) {
 				balls.velocity.y = -balls.velocity.y;
 			}
 		}
