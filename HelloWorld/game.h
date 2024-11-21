@@ -5,6 +5,12 @@
 
 void SpawnBall();
 void SetupScene();
-void StepFrame(float elapsedTime);
-void LoadGame();
+void StepFrame(float elapsedTime, Paddle& paddle);
+void LoadGame(Paddle& paddle);
 void colliding(Paddle& paddle);
+void highScores();
+void DrawHighScores();
+void reset(Paddle& paddle);
+void readLinesAmount();
+void save();
+void scoresAdd();
