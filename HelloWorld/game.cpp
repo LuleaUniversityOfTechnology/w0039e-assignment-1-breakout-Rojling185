@@ -37,7 +37,6 @@ class arrayOfInts {
 						newData[i] = data[i];
 					}
 					delete[] data;
-					data[size - 1] = value;
 					data = newData;
 					
 				}
@@ -61,7 +60,7 @@ void save() {
 		MyFile << 0;
 	}
 	MyFile << scoress.data[0];
-	for (int i = 1; i < scoress.size-1; i++) {
+	for (int i = 1; i < scoress.size; i++) {
 		MyFile << endl << scoress.data[i];
 	}
 	MyFile.close();
@@ -206,25 +205,29 @@ void highScores() {
 	bool exist = false;
 	for (int i = 0; i < scoress.size; i++) {
 		if (score == scoress.data[i]) {
-			exist = false;
+			exist = true;
 			return;
 		}
 		else {
-			exist = true;
+			exist = false;
 		}
 
 	}
 	
-	if (exist) {
+	if (!exist) {
 		if (score > scoress.data[5]) {
 			scoress.data[5] = score;
-		}
-		for (int x = 5; x > 0; x--) {
-			if (scoress.data[x] > scoress.data[x - 1]) {
-				int tempscore = scoress.data[x];
-				scoress.data[x] = scoress.data[x-1];
-				scoress.data[x - 1] = tempscore;
+			for (int x = 5; x > 0; x--) {
+				if (scoress.data[x] > scoress.data[x - 1]) {
+					int tempscore = scoress.data[x];
+					scoress.data[x] = scoress.data[x - 1];
+					scoress.data[x - 1] = tempscore;
+				}
 			}
+		}
+		else {
+			scoress.push_back(scoress.size + 1);
+			scoress.data[scoress.size] = score;
 		}
 	}
 
