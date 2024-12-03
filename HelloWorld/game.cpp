@@ -58,10 +58,13 @@ void save() {
 			MyFile << 0 <<endl;
 		}
 		MyFile << 0;
+		return;
 	}
 	MyFile << scoress.data[0];
 	for (int i = 1; i < scoress.size; i++) {
-		MyFile << endl << scoress.data[i];
+		if(scoress.data[i] != 0){
+			MyFile << endl << scoress.data[i];
+		}
 	}
 	MyFile.close();
 	
@@ -88,6 +91,7 @@ void scoresAdd() {
 	string line;
 	int i = 0;
 	while (getline(MyReadFile, line)) {
+		
 		int temp = stoi(line);
 		scoress.data[i] = temp;
 		i++;
@@ -215,20 +219,21 @@ void highScores() {
 	}
 	
 	if (!exist) {
-		if (score > scoress.data[5]) {
-			scoress.data[5] = score;
-			for (int x = 5; x > 0; x--) {
-				if (scoress.data[x] > scoress.data[x - 1]) {
-					int tempscore = scoress.data[x];
-					scoress.data[x] = scoress.data[x - 1];
-					scoress.data[x - 1] = tempscore;
-				}
+		
+		
+		scoress.push_back(scoress.size + 1);
+		scoress.data[scoress.size-1] = score;
+		for (size_t i = scoress.size; i > 0; i--)
+		{
+			if (scoress.data[i] > scoress.data[i - 1]) {
+				int tempscore = scoress.data[i];
+				scoress.data[i] = scoress.data[i - 1];
+				scoress.data[i - 1] = tempscore;
 			}
+				
 		}
-		else {
-			scoress.push_back(scoress.size + 1);
-			scoress.data[scoress.size] = score;
-		}
+			
+		
 	}
 
 }
